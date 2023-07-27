@@ -3,7 +3,7 @@ import { GridContentProps } from '../components/GridContent';
 import { GridImageElementProps, GridImageProps } from '../components/GridImage';
 import { GridTextElementProps, GridTextProps } from '../components/GridText';
 import { GridTwoColumnsProps } from '../components/GridTwoColumns';
-import { SectionsProps } from '../templates/Home';
+import { SectionsProps } from './map-data';
 
 export const mapSections = (sections = []): SectionsProps[] => {
   return sections.map((section) => {
