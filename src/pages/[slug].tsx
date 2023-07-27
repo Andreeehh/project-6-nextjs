@@ -1,32 +1,35 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import P from 'prop-types';
 import { loadPages } from '../api/load-pages';
-import Home, { HomeProps } from '../templates/Home';
+import Home from '../templates/Home';
 
-export default function Page({ data }: HomeProps) {
+export default function Page({ data }) {
   return <Home data={data} />;
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = (await loadPages()).map((page) => {
-    return {
-      params: {
-        slug: page.slug,
-      },
-    };
-  });
+Page.propTypes = {
+  data: P.array,
+};
+
+export const getStaticPaths = async () => {
+  // const paths = (await loadPages()).map((page) => {
+  //   return {
+  //     params: {
+  //       slug: page.slug,
+  //     },
+  //   };
+  // });
 
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: true,
   };
 };
 
-export const getStaticProps: GetStaticProps<HomeProps> = async (ctx) => {
+export const getStaticProps = async (ctx) => {
   let data = null;
 
-  console.log(ctx.params.slug);
   try {
-    data = await loadPages(ctx.params.slug as string);
+    data = await loadPages(ctx.params.slug);
   } catch (e) {
     data = null;
   }
@@ -41,5 +44,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async (ctx) => {
     props: {
       data,
     },
+    revalidate: 30,
   };
 };

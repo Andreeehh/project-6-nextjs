@@ -1,32 +1,25 @@
+import P from 'prop-types';
 import Head from 'next/head';
 
-import { GridTwoColumns, GridTwoColumnsProps } from '../../components/GridTwoColumns';
-import { GridContent, GridContentProps } from '../../components/GridContent';
-import { GridText, GridTextProps } from '../../components/GridText';
-import { GridImage, GridImageProps } from '../../components/GridImage';
+import { GridTwoColumns } from '../../components/GridTwoColumns';
+import { GridContent } from '../../components/GridContent';
+import { GridText } from '../../components/GridText';
+import { GridImage } from '../../components/GridImage';
 
 import { Base } from '../Base';
 
 import config from '../../config';
 import { theme } from '../../styles/theme';
-import { LogoLinkProps } from '../../components/LogoLink';
-import { MenuLinkProps } from '../../components/MenuLink';
+import { useRouter } from 'next/router';
+import { Loading } from '../Loading';
 
-export type PageData = {
-  title: string;
-  slug: string;
-  footerHtml: string;
-  menu: LogoLinkProps & { links: MenuLinkProps[] };
-  sections: SectionsProps[];
-};
+function Home({ data }) {
+  const router = useRouter();
 
-export type SectionsProps = GridImageProps | GridTextProps | GridTwoColumnsProps | GridContentProps;
+  if (router.isFallback) {
+    return <Loading />;
+  }
 
-export type HomeProps = {
-  data: PageData[];
-};
-
-function Home({ data }: HomeProps) {
   const { menu, sections, footerHtml, slug, title } = data[0];
   const { links, text, link, srcImg } = menu;
 
@@ -36,28 +29,27 @@ function Home({ data }: HomeProps) {
         <title>
           {title} | {config.siteName}
         </title>
-
         <meta name="theme-color" content={theme.colors.primaryColor} />
-        <meta name="description" content="Landing pages via next" />
+        <meta name="description" content="As landing pages mais legais da Internet." />{' '}
       </Head>
       {sections.map((section, index) => {
         const { component } = section;
         const key = `${slug}-${index}`;
 
         if (component === 'section.section-two-columns') {
-          return <GridTwoColumns key={key} {...(section as GridTwoColumnsProps)} />;
+          return <GridTwoColumns key={key} {...section} />;
         }
 
         if (component === 'section.section-content') {
-          return <GridContent key={key} {...(section as GridContentProps)} />;
+          return <GridContent key={key} {...section} />;
         }
 
         if (component === 'section.section-grid-text') {
-          return <GridText key={key} {...(section as GridTextProps)} />;
+          return <GridText key={key} {...section} />;
         }
 
         if (component === 'section.section-grid-image') {
-          return <GridImage key={key} {...(section as GridImageProps)} />;
+          return <GridImage key={key} {...section} />;
         }
       })}
     </Base>
@@ -65,3 +57,7 @@ function Home({ data }: HomeProps) {
 }
 
 export default Home;
+
+Home.propTypes = {
+  data: P.array,
+};
