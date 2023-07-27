@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MenuLinkProps } from '../components/MenuLink';
-import { PageData } from '../templates/Home';
+import { PageData } from './map-data';
 
 export const mapMenu = (menu = {} as any): PageData['menu'] => {
   const { open_in_new_tab: newTab = false, logo_text: text = '', logo_link: link = '' } = menu;
