@@ -1,7 +1,12 @@
 import config from '../config';
-import Home, { HomeProps } from '../templates/Home';
+import Home from '../templates/Home';
 import { loadPages } from '../api/load-pages';
 import { GetStaticProps } from 'next';
+import { PageData } from '../api/map-data';
+
+export type HomeProps = {
+  data: PageData[];
+};
 
 export default function Index({ data = null }: HomeProps) {
   return <Home data={data} />;
