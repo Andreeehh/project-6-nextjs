@@ -17,5 +17,10 @@ export const Container = styled.div<Background>`
     min-height: 100vh;
     display: flex;
     align-items: center;
+    opacity: 0;
+    transition: opacity 3s;
+    &.show {
+      opacity: 1;
+    }
   `}
 `;

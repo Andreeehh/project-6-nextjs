@@ -35,21 +35,20 @@ function Home({ data }) {
       {sections.map((section, index) => {
         const { component } = section;
         const key = `${slug}-${index}`;
-
         if (component === 'section.section-two-columns') {
-          return <GridTwoColumns key={key} {...section} />;
+          return <GridTwoColumns key={key} {...section} isFirstElement={index == 0} />;
         }
 
         if (component === 'section.section-content') {
-          return <GridContent key={key} {...section} />;
+          return <GridContent key={key} {...section} isFirstElement={index == 0} />;
         }
 
         if (component === 'section.section-grid-text') {
-          return <GridText key={key} {...section} />;
+          return <GridText key={key} {...section} isFirstElement={index == 0} />;
         }
 
         if (component === 'section.section-grid-image') {
-          return <GridImage key={key} {...section} />;
+          return <GridImage key={key} {...section} isFirstElement={index == 0} />;
         }
       })}
     </Base>

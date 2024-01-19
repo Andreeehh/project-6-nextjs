@@ -10,11 +10,19 @@ export type GridTwoColumnsProps = {
   background?: boolean;
   sectionId?: string;
   component?: string;
+  isFirstElement?: boolean;
 };
 
-export const GridTwoColumns = ({ title, text, srcImg, background = false, sectionId = '' }: GridTwoColumnsProps) => {
+export const GridTwoColumns = ({
+  title,
+  text,
+  srcImg,
+  background = false,
+  sectionId = '',
+  isFirstElement,
+}: GridTwoColumnsProps) => {
   return (
-    <SectionBackground background={background} sectionId={sectionId}>
+    <SectionBackground background={background} sectionId={sectionId} isFirstElement={isFirstElement}>
       <Styled.Container>
         <Styled.TextContainer>
           <Heading uppercase colorDark={!background} as="h2">
