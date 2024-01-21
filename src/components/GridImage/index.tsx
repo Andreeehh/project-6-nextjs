@@ -15,19 +15,11 @@ export type GridImageProps = {
   grid?: GridImageElementProps[];
   sectionId?: string;
   component?: string;
-  isFirstElement?: boolean;
 };
 
-export const GridImage = ({
-  title,
-  description,
-  grid,
-  background = false,
-  sectionId = '',
-  isFirstElement = false,
-}: GridImageProps) => {
+export const GridImage = ({ title, description, grid, background = false, sectionId = '' }: GridImageProps) => {
   return (
-    <SectionBackground background={background} sectionId={sectionId} isFirstElement={isFirstElement}>
+    <SectionBackground background={background} sectionId={sectionId}>
       <Styled.Container>
         <Heading size="huge" uppercase colorDark={!background} as="h2">
           {title}

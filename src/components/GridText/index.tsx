@@ -15,19 +15,11 @@ export type GridTextProps = {
   grid: GridTextElementProps[];
   sectionId?: string;
   component?: string;
-  isFirstElement?: boolean;
 };
 
-export const GridText = ({
-  title,
-  description,
-  grid,
-  background = false,
-  sectionId = '',
-  isFirstElement = false,
-}: GridTextProps) => {
+export const GridText = ({ title, description, grid, background = false, sectionId = '' }: GridTextProps) => {
   return (
-    <SectionBackground background={background} sectionId={sectionId} isFirstElement={isFirstElement}>
+    <SectionBackground background={background} sectionId={sectionId}>
       <Styled.Container>
         <Heading size="huge" uppercase colorDark={!background} as="h2">
           {title}

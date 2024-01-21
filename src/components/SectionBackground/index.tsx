@@ -6,19 +6,13 @@ export type SectionBackgroundProps = {
   children: React.ReactNode;
   background?: boolean;
   sectionId?: string;
-  isFirstElement?: boolean;
 };
 
-export const SectionBackground = ({
-  children,
-  background = false,
-  sectionId = '',
-  isFirstElement = false,
-}: SectionBackgroundProps) => {
+export const SectionBackground = ({ children, background = false, sectionId = '' }: SectionBackgroundProps) => {
   // Utilize o hook useRef para referenciar o elemento do post
   const postRef = useRef(null);
   // Utilize o estado para controlar se a classe deve ser adicionada
-  const [shouldShow, setShouldShow] = useState(isFirstElement);
+  const [shouldShow, setShouldShow] = useState(false);
 
   // Função para verificar se o post está visível na tela
   const isElementVisible = () => {
@@ -37,6 +31,7 @@ export const SectionBackground = ({
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     // Remova o listener ao desmontar o componente
     return () => {

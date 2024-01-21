@@ -36,19 +36,19 @@ function Home({ data }) {
         const { component } = section;
         const key = `${slug}-${index}`;
         if (component === 'section.section-two-columns') {
-          return <GridTwoColumns key={key} {...section} isFirstElement={index == 0} />;
+          return <GridTwoColumns key={key} {...section} />;
         }
 
         if (component === 'section.section-content') {
-          return <GridContent key={key} {...section} isFirstElement={index == 0} />;
+          return <GridContent key={key} {...section} />;
         }
 
         if (component === 'section.section-grid-text') {
-          return <GridText key={key} {...section} isFirstElement={index == 0} />;
+          return <GridText key={key} {...section} />;
         }
 
         if (component === 'section.section-grid-image') {
-          return <GridImage key={key} {...section} isFirstElement={index == 0} />;
+          return <GridImage key={key} {...section} />;
         }
       })}
     </Base>
